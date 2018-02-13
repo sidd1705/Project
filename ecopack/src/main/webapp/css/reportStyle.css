@@ -1,0 +1,74 @@
+h4{
+	padding-left:52px;
+	padding-top: 10px;
+    height: 39px;
+    background:#e0d6d8 ;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.row{
+	margin-top:20px;
+}
+hr{
+	margin-top: 20px;
+    margin-bottom: 20px;
+    border-top: 3px solid rgba(0,0,0,0.87) !important;
+}
+input{
+	
+	width: 100%;
+    background: white;
+    border: 0px;
+}
+td{
+	width:50px;
+}
+body{
+	background: white;
+}
+.table>tbody>tr>th{
+
+       width: 20px;
+       padding: 8px !important;
+}  
+
+.table>tbody>tr>td{
+	width:50px;
+	
+}
+.table{
+	background:white;
+}
+
+.scrollable {
+    height: 400px;
+    overflow: scroll;
+}
+
+#planheader {
+	text-align:center;
+	  background: rgba(51, 51, 48, 0.04);
+	
+}
+#Header1{
+	 background: #ddd;
+}
+
+
+#subbtn{
+	margin-top:10px;
+}
+  
+.tulipreport{
+	margin-right: 20px;
+    border: 1px solid rgba(234, 234, 234, 0.03);
+    padding-left: 25px;
+    background: rgba(236, 236, 236, 0.87);
+    padding-right: 25px;
+}
+label{
+	font-size:15px !important;
+}
+.form-group{
+	margin-left:auto !important;
+}

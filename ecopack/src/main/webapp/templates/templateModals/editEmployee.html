@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Edit Employee</title>
+<!-- <link href="css/modalDialogs.css" rel="stylesheet"></link> -->
+</head>
+<body>
+	<div class="modal-header modal-header-info">
+		<h3 class="panel-title">
+			<span ng-bind="buttonAction"></span>-Employee Details
+		</h3>
+	</div>
+	<div class="modal-body" id="modal-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="col-sm-6">
+					<div class="form-group" hidden="true">
+						<label for="empName" class="col-sm-4 control-label">Emp ID</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" ng-model="empId"
+								id="empId" readonly="readonly">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="empnumber" class="col-sm-4 control-label">Emp Number</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" ng-model="empNumber"
+								id="emp_Number" ng-maxlength="10" name="empnumber"
+								ng-readonly="buttonAction=='Edit'" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="fullName" class="col-sm-4 control-label">Full Name</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="fullName"
+								ng-model="empFullname" ng-maxlength="60"  name="name" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="address" class="col-sm-4 control-label">Address</label>
+						<div class="col-sm-8">
+							<textarea class="form-control" id="address" name="addresss"
+								ng-model="empAddress" rows="4" ng-maxlength="200" required></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+							<label for="gender" class="col-sm-4 control-label ">Gender</label>
+							<div class="col-sm-8">
+
+								<label class="radio-inline"> <input type="radio"
+									ng-model="gender" ng-value="'Male'" name="optradio">Male
+								</label> <label class="radio-inline"> <input type="radio"
+									ng-model="gender" ng-value="'Female'" name="optradio">Female
+								</label>
+
+							</div>
+					</div>
+					<div class="form-group required" style="display: inline-block;">
+							<label for="birthDate" class="col-sm-4 control-label">Birth
+								Date</label>
+							<div class="col-sm-8">
+								<p class="input-group" id="birthDate">
+									<input type="text" class="form-control"
+										uib-datepicker-popup="{{format}}" ng-model="dob" name="dob"
+										is-open="dobPopup" datepicker-options="dateOptions"
+										required close-text="Close"
+										alt-input-formats="altInputFormats" readonly="readonly" /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="openDobDatePicker()">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</p>
+							</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="mobileNo" class="col-sm-4 control-label">Mobile
+							No.</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" ng-model="mobileNumber"
+								id="mobileNo"
+								name="mobileno" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="email" class="col-sm-4 control-label">Email ID</label>
+						<div class="col-sm-8">
+							<input type="email" class="form-control" ng-model="emailId"
+								id="email" maxlength="100" required
+								ng-pattern="/^(\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3})|(\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}.[a-zA-Z]{2,3})$/"
+								name="email" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="joinDate" class="col-sm-4 control-label">Join
+							Date</label>
+						<div class="col-sm-8">
+							<p class="input-group" id="joinDate">
+								<input type="text" class="form-control" name="doj"
+									uib-datepicker-popup="{{format}}" ng-model="joinDate"
+									is-open="joinDatePopup" datepicker-options="dateOptions"
+									ng-required="true" close-text="Close"
+									alt-input-formats="altInputFormats" readonly="readonly" /> <span
+									class="input-group-btn">
+									<button type="button" class="btn btn-default"
+										ng-click="openJoinDateDatePicker()">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="role" class="col-sm-4 control-label">Role</label>
+						<div class="col-sm-8">
+							<select id="role" class="form-control"
+								name="role" ng-model="roleId"
+								ng-options="user.roleId as user.role for user in userRoles">
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="manager" class="col-sm-4 control-label">Manager
+						</label>
+						<div class="col-sm-8">
+							<select class="form-control" ng-model="managerId"
+								name="manager"
+								ng-options="mgr.managerId as mgr.empFullname for mgr in employeeManager">
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="isActive" class="col-sm-4 control-label">IS
+							Active</label>
+						<div class="col-sm-8">
+							<select class="form-control" ng-model="isActive"
+								name="isActive"
+								ng-options="obj.id as obj.status for obj in isActiveOptions">
+							</select>
+						</div>
+					</div>
+					<div class="form-group" ng-show="isActive === 0">
+						<label for="projectEndDate" class="col-sm-4 control-label">Resign
+							Date</label>
+						<div class="col-sm-8">
+							<p class="input-group" id="resignDate"
+								ng-disabled="isActive != 0">
+								<input type="text" class="form-control"
+									uib-datepicker-popup="{{format}}" ng-model="resignDate"
+									is-open="resignDatePopup" datepicker-options="dateOptions"
+									close-text="Close" alt-input-formats="altInputFormats" readonly />
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default"
+										ng-click="openResignDateDatePicker()">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="submit" class="btn btn-primary" id="btnAdd"
+			ng-click="btnSaveEmployee()">
+			<span class="glyphicon glyphicon-saved"></span>&nbsp; Save
+		</button>
+		<button class="btn btn-warning" type="button" ng-click="cancelModal()">Cancel</button>
+	</div>
+</body>
+</html>

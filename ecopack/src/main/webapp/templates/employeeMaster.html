@@ -1,0 +1,74 @@
+<div class="tab-pane fade in active" id="addItemMasterTemplate"
+	ng-controller="employeeMasterController">
+	<div class="panel panel-default panel-info">
+		<div class="panel-heading">
+			<h3 class="panel-title" style="font-size: 18px !important;">Employee
+				Master Details</h3>
+			<input type="submit" id="btnAddNew"
+				class="btn btn-warning btn-sm pull-right"
+				ng-click="btnAddEmployee()" value="Add New">
+		</div>
+		<div class="container-fluid">
+			<div id="manageemployee" class="scrollable">
+				<table class="table table-striped text-center table-bordered">
+					<thead>
+						<tr>
+							<th hidden="true">Row Id</th>
+							<th><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i><i
+								class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></th>
+							<th hidden="true">Employee ID</th>
+							<th>Emp. No.</th>
+							<th>Full Name</th>
+							<th>Address</th>
+							<th>Gender</th>
+							<th>Birth Date</th>
+							<th>Mobile Number</th>
+							<th>Email Id.</th>
+							<th>Join Date</th>
+							<th>Role</th>
+							<th>Manager Id</th>
+							<th>Is Active</th>
+							<th>Resign Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="emp in employeeDetailsOnPage">
+							<td hidden="true">{{ $index + 1 }}</td>
+							<td>
+								<!-- <a href="#" ng-click="btnDeleteRow(emp)"> <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>  -->
+								<a href="#" ng-click="btnEditEmployee(emp)"> <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a>
+							</td>
+							<td ng-bind="emp.empId" hidden="true"></td>
+							<td ng-bind="emp.empNumber"></td>
+							<td ng-bind="emp.empFullname"></td>
+							<td ng-bind="emp.empAddress"></td>
+							<td ng-bind="emp.gender"></td>
+							<td ng-bind="emp.dob"></td>
+							<td ng-bind="emp.mobileNumber"></td>
+							<td ng-bind="emp.emailId"></td>
+							<td ng-bind="emp.joinDate"></td>
+							<td ng-bind="emp.roleId"></td>
+							<td ng-bind="emp.managerId"></td>
+							<td ng-bind="emp.isActive"></td>
+							<td ng-bind="emp.resignDate"></td>
+						</tr>
+					</tbody>
+				</table>
+				<p class="text-center text-muted" ng-show="imLoading">
+					<span class="fa fa-spinner fa-spin fa-4x"></span> <br /> <br />
+					Loading, please wait...
+				</p>
+				<div ng-show="datanotfound == true">
+					<h4 style="text-align: center">Data not found...</h4>
+				</div>
+				<ul uib-pagination class="pagination-sm" max-size="maxSize"
+					total-items="totalItems" ng-model="currentPage"
+					boundary-links="true" num-pages="numPages"
+					items-per-page="itemsPerPage"></ul>
+				<pre>Page: {{currentPage}} / {{numPages}}</pre>
+			</div>
+		</div>
+	</div>
+</div>
+
+

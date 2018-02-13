@@ -1,0 +1,479 @@
+
+
+.dropdown-menu{
+
+    width: 254.979166px;
+    height: 82.97916599999999px;
+}
+
+
+.borders {
+    border: 1px solid #f74703;
+}
+nav.navbar.navbar-inverse {
+    background-color: #f74703;
+}
+nav.navbar.navbar-inverse.darkheader {
+    background-color: #f74703;
+}
+.dashboardbanimg-responsivener {
+    margin-top: 100px;
+}
+.nav-stacked>li>a {
+    color: #000;
+    text-align: left;
+    font-size: 15px;
+}
+.nav-stacked>li.active>a,
+.nav-stacked>li.active>a:focus,
+.nav-stacked>li.active>a:hover {
+    font-size: 15px;
+    background: #fff;
+    color: #000;
+    -webkit-box-shadow: 0px 0px 7px 2px #ccc;
+    -moz-box-shadow: 0px 0px 7px 2px #ccc;
+    box-shadow: 0px 0px 7px 2px #ccc;
+}
+.nav-stacked>li.active:after {
+    display: none;
+}
+hr {
+    border-top: 1px solid #ccc;
+}
+h1 {
+    font-size: 21px;
+    padding: 38px;
+}
+h1 {
+    margin-left: 30px;
+}
+@media screen and (max-width: 991px) and (min-width: 767px) {
+    .darkheader .navbar-nav>li>a {
+        padding: 40px 12px 40px 12px;
+    }
+}
+@media only screen and (max-width: 767px) {
+    nav.navbar.navbar-inverse.darkheader {
+        background: rgba(0, 0, 0, 0.80);
+    }
+    .darkheader .navbar-nav>li>a {
+        padding: 10px 10px 10px 25px;
+    }
+}
+/*----my style---*/
+
+.img-responsive {
+	padding-left:12px;
+    height: 25px;
+}
+.dash-menu {
+    margin-left: 0px;
+    position: relative;
+    /*height: 800px;*/
+    height:125vh;
+    bottom: 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: rgb(245, 123, 34);
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: #ffffff;
+}
+#maincontainer {
+    background-color: #D0D0D0;
+}
+.bg-gray {
+    /*margin-top: 55px;*/
+}
+#ordercontainer {
+    background-color: #D0D0D0;
+}
+.nav-tabs {
+    background: #f5f5f5;
+}
+.orderlinecontainer {
+    margin-top: -55px;
+    margin-left: 0px !important;
+    margin-right: 15px;
+}
+#orderLine{
+	width :100%;
+}
+.top15 {
+    margin-top: 15px;
+}
+.top30 {
+    margin-top: 30px;
+}
+.orderinfo {
+    width: 1105px;
+    margin-left: 2px !important;
+    background: #ffffff;
+}
+.nav-tabs {
+    border-bottom: 1px solid #ddd;
+    margin-left: 15px;
+    margin-top: 50px;
+    margin-right:-45px;
+}
+form {
+   
+
+    padding: 30px;
+    border-radius: 3px;
+}
+body {
+    background: #fff;
+}
+body.md-default-theme,
+body,
+html.md-default-theme,
+html {
+    background-color: #fff !important;
+}
+.collapse {
+    background: #f57b22;
+}
+#theorderForm{
+	margin-top: 16px;
+/*     border: 1px solid #ddd; */
+    background: #ffffff;
+}
+#theLineForm{
+	padding-bottom:40px;
+	max-width:1170px;
+    margin-top: 16px;
+    border: 1px solid #ddd;
+    background: #ffffff;	
+}
+#thePrintForm{
+	padding-bottom:37px;
+	max-width: 1073px;
+    margin-top: 16px;
+    border: 1px solid #ddd;
+    background: #ffffff;
+    width: 100%;
+    }*/
+#Searchbar{ 
+	max-height:243px;
+	max-width: 1073px;
+	margin-top: 16px;
+    border: 1px solid #ddd;
+    background: #ffffff;
+	
+}
+/* #productionForm {
+	padding-bottom:37px;
+	max-width: 1073px;
+    margin-top: 16px;
+    border: 1px solid #ddd;
+    background: #ffffff;
+} */
+#inputrow1 {
+    padding-bottom: 6px !important;
+    margin-bottom: 11px;
+    margin-top: --57px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background: #ddd;
+}
+.navbar {
+    margin-left: -14px;
+    margin-right: -15px;
+}
+#find{
+	background: #f57b22 !important;
+    border: 0px;
+    margin-top: 8px;
+}
+#subbtn{
+	background: #f57b22 !important;
+    border: 0px;
+    margin-top: -2px;
+}
+
+
+.orderinfo{
+	width: 1097px;
+    margin-left: 248px;
+    background: #ffffff;
+}
+
+#printschedule,#productionschedule {
+	width: 100%;
+    background: #ffffff;
+    margin-right:10px !important;
+}
+.h4,
+h4 {
+    padding-left: 10px;
+    color: black;
+    padding-top: 9px;
+  
+    margin-top: -6px;
+    font-size: 18px;
+   
+    margin-right: -15px;
+    margin-left: -15px;
+}
+#printRow {
+    margin-bottom: 11px;
+    margin-top: -12px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background: #ddd;
+}
+#Linerow {
+    margin-bottom: 11px;
+    margin-top: -12px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background: #ddd;
+}
+.scrollable {
+    height:  670px;
+    overflow: scroll;
+}
+.table-bordered {
+    background: white;
+    border: 1px solid #ddd;
+    color: black;
+}
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-nav>li>a {
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+    padding-right: 40px;
+}
+footer{
+	margin-top: -10px;
+    height: 45px;
+	background:#f74703;
+}
+
+.h5, h5 {
+	color:white;
+    text-align: center;
+    font-size: 26px;
+    padding-top: 10px;
+}
+
+thead{
+	
+	background-color: lightslategrey;
+}
+
+
+
+<!--Sidebar ,Header,Body style-->
+
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+@media(min-width:768px) {
+    body {
+        margin-top: 50px;
+    }
+    /*html, body, #wrapper, #page-wrapper {height: 100%; overflow: hidden;}*/
+}
+
+#wrapper {
+    padding-left: 0;    
+}
+
+#page-wrapper {
+    width: 100%;        
+    padding: 0;
+    background-color: #fff;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 225px;
+    }
+
+    #page-wrapper {
+        padding: 22px 10px;
+    }
+}
+
+/* Top Navigation */
+
+.top-nav {
+    padding: 0 15px;
+}
+
+.top-nav>li {
+    display: inline-block;
+    float: left;
+}
+
+.top-nav>li>a {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    line-height: 20px;
+    color: #fff;
+}
+
+.top-nav>li>a:hover,
+.top-nav>li>a:focus,
+.top-nav>.open>a,
+.top-nav>.open>a:hover,
+.top-nav>.open>a:focus {
+    color: #fff;
+    background-color: #f57b22;
+}
+
+.top-nav>.open>.dropdown-menu {
+    float: left;
+    position: absolute;
+    margin-top: 0;
+    /*border: 1px solid rgba(0,0,0,.15);*/
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: #fff;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+.top-nav>.open>.dropdown-menu>li>a {
+    white-space: normal;
+}
+
+/* Side Navigation */
+
+@media(min-width:768px) {
+    .side-nav {
+        position: fixed;
+        top: 60px;
+        left: 225px;
+        width: 225px;
+        margin-left: -225px;
+        border: none;
+        border-radius: 0;
+        border-top: 1px rgba(0,0,0,.5) solid;
+        overflow-y: auto;
+        background-color: #222;
+        /*background-color: #5A6B7D;*/
+        bottom: 0;
+        overflow-x: hidden;
+        padding-bottom: 40px;
+    }
+
+    .side-nav>li>a {
+        width: 225px;
+        border-bottom: 1px rgba(0,0,0,.3) solid;
+    }
+
+    .side-nav li a:hover,
+    .side-nav li a:focus {
+        outline: none;
+        background-color: #1a242f !important;
+    }
+}
+
+.side-nav>li>ul {
+    padding: 0;
+    border-bottom: 1px rgba(0,0,0,.3) solid;
+}
+
+.side-nav>li>ul>li>a {
+    display: block;
+    padding: 10px 15px 10px 38px;
+    text-decoration: none;
+    /*color: #999;*/
+    color: #fff;    
+}
+
+.side-nav>li>ul>li>a:hover {
+    color: #fff;
+}
+
+.navbar .nav > li > a > .label {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  position: absolute;
+  top: 14px;
+  right: 6px;
+  font-size: 10px;
+  font-weight: normal;
+  min-width: 15px;
+  min-height: 15px;
+  line-height: 1.0em;
+  text-align: center;
+  padding: 2px;
+}
+
+.navbar .nav > li > a:hover > .label {
+  top: 10px;
+}
+
+.navbar-brand {
+    padding: 5px 15px;
+}
+
+
+/*---image logo style--*/
+img{
+    margin-top: 10px;
+    height: 33px;
+}
+
+/*---navbar Header top--*/
+.navbar-inverse {
+    background-color: #ef1212;
+    border-color: #080808;
+}
+
+<!---panel style-->
+.fade {
+	opacity: 1;
+} 
+
+.tab-pane{
+	
+	margin-top: 50px;
+    margin-left: -23px;
+    margin-right: -23px;
+	
+}
+
+.tab-content>.tab-pane {
+    display: block;
+}
+
+select {
+  font-family: 'FontAwesome', 'Second Font name' !important;
+      font-size: 16px !important;
+}
+
+/* Oee report style */
+
+#reportheadForm{
+	margin-left: 30px;
+    margin-right: 35px;
+}
+
+#plantable,#saveplan,#losstable{
+	margin-left: 33px;
+   
+    width: 1237px;
+}
+
+#machineno{
+	width: 80px !important; 
+	margin-left:10px;
+}
+#date,#shift{
+	margin-left:15px;
+}
+
+#product1{
+	margin-left:8px;
+}
+
+#product2{
+	margin-left:8px;
+}
+
+#reporttulip{
+	margin-top:12px;
+}

@@ -1,0 +1,239 @@
+<div class="tab-pane fade in active" id="ordertemplate" ng-controller="orderLineController">
+	<div class="panel panel-default panel-info">
+		<div class="panel-heading">
+			<h3 class="panel-title" style="font-size: 18px !important;">Sales Order Information</h3>
+		</div>
+		<div class="container orderinfo " id="orderLine">
+			<div id="orderLine">
+				<form data-toggle="validator" role="form" name="theorderForm"
+					id="theorderForm" ng-submit="btnSaveOrder()" novalidate>
+					<div class="form-group row" id="inputrow1">
+						<div class="col-sm-4">
+
+							<div class="form-group">
+								<div class="col-sm-5">
+									<label for="" class="control-label">Order Number </label>
+								</div>
+								<div class="col-sm-7">
+									<input type="number" class="form-control" id="ordernumber" 
+										 ng-model="orderNumber" ng-blur="checkOrderNumberExists()"
+										data-error="Please enter order number" required>
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-5">
+									<label for="ordernumber" class="control-label"> Order
+										Type </label>
+								</div>
+								<div class="col-sm-7">
+									<select type="text" class="form-control" id="orderType"
+										ng-model="customerType"
+										data-error="Please select customer type" required>
+										<option></option>
+										<option>Trading</option>
+										<option>Manufacturing</option>
+									</select>
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-5">
+									<label for="party" class="control-label">Customer Name</label>
+								</div>
+								<div class="col-sm-7">
+									<p id="selectCust" angucomplete-alt 
+										id="customerName"
+										input-name="customerName" 
+										class="angucomplete-holder" 
+										placeholder="Enter Customer"
+										maxlength="50" 
+										pause="100" 
+										selected-object="selectedCustomer"
+										local-data="customerList" 
+										local-search="localSearch"
+										search-fields="customerName" 
+										title-field="customerName"
+										minlength="1"
+										input-class="form-control"
+										field-required-class="customerName"
+										field-required="true"
+										disable-input="disableInput">
+									</p>
+									<h4 hidden="true">
+										<span ng-show="theorderForm.customerName.$valid">[VALID]</span>
+										<span ng-show="theorderForm.customerName.$invalid">[INVALID]</span>
+									</h4>
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<div class="col-sm-5">
+									<label for="orderdate" class="control-label">Order Date</label>
+								</div>
+								<div class="col-sm-7">
+									<p class="input-group" id="orderedDate">
+										<input type="text" id="orderedDate" class="form-control"
+											uib-datepicker-popup="{{format}}" ng-model="orderedDate"
+											ng-change="changeDueDate()" is-open="orderedDatePopup"
+											datepicker-options="orderDateOptions" close-text="Close"
+											alt-input-formats="altInputFormats" readonly="readonly" /> <span
+											class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="openOrderedDateDatePicker()">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-5">
+									<label for="salesperson" class="control-label">Sales
+										Person </label>
+								</div>
+								<div class="col-sm-7">
+									<!-- <input type="text" class="form-control" id="salesPerson"
+										ng-model="sales_person" data-error="Please enter sales person"
+										required> -->
+									<p id="selectSalesExecutive" angucomplete-alt 
+										id="salesExecutiveName"
+										input-name="salesExecutiveName" 
+										class="angucomplete-holder" 
+										placeholder="Enter Sales Executive"
+										maxlength="50" 
+										pause="100" 
+										selected-object="selectedSalesExecutive"
+										local-data="salesExecutiveList" 
+										local-search="localSearch"
+										search-fields="salesExecutiveName" 
+										title-field="salesExecutiveName"
+										minlength="1"
+										input-class="form-control"
+										field-required-class="salesExecutiveName"
+										field-required="true"
+										disable-input="disableInput">
+									</p>
+									<h4 hidden="true">
+										<span ng-show="theorderForm.salesExecutiveName.$valid">[VALID]</span>
+										<span ng-show="theorderForm.salesExecutiveName.$invalid">[INVALID]</span>
+									</h4>
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+						</div>
+						<!--end of col2-->
+						<div class="col-sm-4">
+							<div class="form-group">
+								<div class="col-sm-5">
+									<label for="currency" class="control-label">Currency</label>
+								</div>
+								<div class="col-sm-7">
+									<select type="text" id="currency" class="form-control"
+										ng-model="currency" data-error="Please select currency "
+										required>
+										<option></option>
+										<option value="INR">&#xf156;&nbsp; INR</option>
+										<option value="USD">&#xf155;&nbsp; USD</option>
+										<option value="EUR">&#xf153;&nbsp; EUR</option>
+										<option value="THB">&#xf15a;&nbsp; THB</option>
+										<option value="JPY">&#xf157;&nbsp; JPY</option>
+										<option value="ILS">&#xf20b;&nbsp; ILS</option>
+										<option value="GBP">&#xf154;&nbsp; GBP</option>
+										<option value="KRW">&#xf159;&nbsp; KRW</option>
+										<option value="RUB">&#xf158;&nbsp; RUB</option>
+										<option value="TRY">&#xf195; &nbsp;TRY</option>
+										<option value="CNY">&#xf157;&nbsp; CNY</option>
+									</select>
+									<div class="help-block with-errors" style="width: 151px;"></div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-5">
+									<label for="total" class="control-label">Total</label>
+								</div>
+								<div class="col-sm-7">
+									<input type="number" class="form-control" id="total"
+										ng-model="totalOrderValue" readonly="readonly"
+										data-error="enter total number">
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+				<form>
+					<h4 style="background: #d9edf7; color: black; height: 45px;">
+						Line Items 
+					<input type="submit" class="btn btn-warning btn-sm pull-right" ng-disabled="theorderForm.$invalid" ng-click="btnAddLineItems()" value="Add New"></h4>
+					<div class="row clearfix" id="inputrow1">
+						<div class="col-md-12">
+							<div class="scrollable">
+								<table class="table table-striped text-center table-bordered">
+									<thead>
+										<tr>
+											<td hidden="true">RowID</td>
+											<td>
+												<i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+												<i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
+											</td>
+											<td hidden="true">Item ID</td>
+											<td>Item Name</td>
+											<td>Item Size</td>
+											<td>Design No.</td>
+											<td>Design Name</td>
+											<td>Paper Color</td>
+											<td>Paper GSM</td>
+											<td>Print Type</td>
+											<td>Color1</td>
+											<td>Color2</td>
+											<td>Item Desc</td>
+											<td>Paper Type</td>
+											<td>Order Value</td>
+											<td>Ordered Quantity</td>
+											<td>In Stock</td>
+											<td>Printing Required</td>
+											<td>Mfg.Required</td>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="order in lineDetails">
+											<td ng-bind="order.id ={{ $index + 1 }}" hidden="true"></td>
+											<td>
+												<a href="#" ng-click="btnDeleteRow(order)"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a> 
+ 												<a href="#" ng-click="btnEditLineItems(order)"> <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a>
+											</td>             
+											<td ng-bind="order.itemId" hidden="true"></td>
+											<td ng-bind="order.itemName"></td>
+											<td ng-bind="order.itemSize"></td>
+											<td ng-bind="order.designNo"></td>
+											<td ng-bind="order.designName"></td>
+											<td ng-bind="order.paperColor"></td>
+											<td ng-bind="order.paperGsm"></td>
+											<td ng-bind="order.printType"></td>
+											<td ng-bind="order.color1"></td>
+											<td ng-bind="order.color2"></td>
+											
+											<td ng-bind="order.itemDesc"></td>
+											<td ng-bind="order.paperTypeId"></td>
+											<td ng-bind="order.orderValue"></td>
+											<td ng-bind="order.orderedQty"></td>
+											<td ng-bind="order.inStock"></td>
+											<td ng-bind="order.printingRequired"></td>
+											<td ng-bind="order.mfgRequired"></td>                
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<button class="btn btn-primary btn-sm pull-right" type="submit" ng-disabled="lineDetails.length==0" ng-click="btnSaveOrder()">Save Order</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			
+		</div>
+	</div>
+</div>

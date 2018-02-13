@@ -1,0 +1,121 @@
+<div class="tab-pane fade in active" id="printingTemplate"
+	ng-controller="printingController">
+	<div class="panel panel-default panel-info">
+		<div class="panel-heading">
+			<h3 class="panel-title">Printing Schedule</h3>
+		</div>
+		<form>
+			<div class="row clearfix" id="printRow">
+				<div class="col-sm-12">
+					<div class="scrollable">
+						<table
+							class="table table-striped text-center table-bordered table-hover table-condensed">
+							<thead class="bg-primary">
+								<tr id="productionrow">
+									<td hidden="true">RowID</td>
+									<td><i class="fa fa-pencil-square-o fa-lg"
+										aria-hidden="true"></i></td>
+									<td hidden="true">Printing Line Id</td>
+									<td hidden="true">Header ID</td>
+									<td hidden="true">Line ID</td>
+									<td>Order No</td>
+									<td>Order Date</td>
+									<td>Item ID</td>
+									<td>Item Name</td>
+									<td>Item Size</td>
+									<td>Design Number</td>
+									<td>Design Name</td>
+									<td>Paper Color(Wh/Br)</td>
+									<td>Paper GSM</td>
+									<td>Print Type(A/C)</td>
+									<td>Color-1</td>
+									<td>Color-2</td>
+									<td>Item Desc</td>
+									<td>Ordered Qty</td>
+									<td>Printing Required</td>
+									<td>Manufacturing Required</td>
+									<td>PCS Per Sheet</td>
+									<td>No of Sheet to print</td>
+									<td>Extra No of Sheet to print</td>
+									<td>Sheets in Kg.</td>
+									<td>Machine ID</td>
+									<td>Paper Lot No.</td>
+									<td>Operator</td>
+									<td>No of Sheets Printed</td>
+									<td>Remaining Sheets To Print</td>
+									<td>Actual Printing date</td>
+									<td>Schedule Date</td>
+									<td>Status</td>
+								</tr>
+							</thead>
+							<tbody ui-sortable="sortableOptions" ng-model="printingScheduleData" class="printingScheduleData">
+								<tr ui-sortable-selectable id="printinfo"
+									ng-repeat="printing in printingScheduleData" class="printing"
+									ng-class="{ remaining : printing.printingScheduleAll.flow_status_code =='Partially Completed', entered : printing.printingScheduleAll.flow_status_code =='Entered'}">
+									
+									<td hidden="true">{{ printing.id= $index+1 }}</td>
+									<td>
+										<a href="#" ng-click="btnAddPrintingSchedule(printing.id)"> 
+											<i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
+										</a>
+									</td>
+									<td ng-bind="printing.printingLineId" hidden="true"></td>
+									<td ng-bind="printing.headerId" hidden="true"></td>
+									<td ng-bind="printing.lineId" hidden="true"></td>
+									<td ng-bind="printing.orderNumber"></td>
+									<td ng-bind="printing.orderedDate"></td>
+									<td ng-bind="printing.itemId"></td>
+									<td ng-bind="printing.itemName"></td>
+									<td ng-bind="printing.itemSize"></td>
+									<td ng-bind="printing.designNo"></td>
+									<td ng-bind="printing.designName"></td>
+									<td ng-bind="printing.paperColor"></td>
+									<td ng-bind="printing.paperGsm"></td>
+									<td ng-bind="printing.printType"></td>
+									<td ng-bind="printing.color1"></td>
+									<td ng-bind="printing.color2"></td>
+									<td ng-bind="printing.itemDesc"></td>
+									<td ng-bind="printing.orderedQty"></td>
+									<td ng-bind="printing.printingRequired"></td>
+									<td ng-bind="printing.mfgRequired"></td>
+							        <td ng-bind="printing.pcsPerSheet"></td>
+							        <td ng-bind="printing.noOfSheetsToPrint"></td>
+							        <td ng-bind="printing.extraNoOfSheetsToPrint"></td>
+							        <td ng-bind="printing.sheetsInKg"></td>
+									<td ng-bind="printing.machineId"></td>
+                                    <td ng-bind="printing.paperLotNum"></td>
+									<td ng-bind="printing.operator"></td>
+									<td ng-bind="printing.noOfSheetsPrinted"></td>
+									<td ng-bind="printing.remainingSheetsToPrint"></td>
+									<td ng-bind="printing.actualPrintingDate"></td>
+									<td ng-bind="printing.scheduleDate"></td>
+									<td ng-bind="printing.flowStatusCode"></td>
+								</tr>
+							</tbody>
+						</table>
+						<div ng-show="datanotfound == true">
+							<h4 style="text-align: center">Data not found...</h4>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</form>
+	</div>
+</div>
+
+
+<style>
+.remaining {
+	background-color: #ffeeba !important;
+}
+
+.entered {
+	background-color: white;
+}
+
+.printing.ui-sortable-selected {
+	background-color: yellow !important;
+}
+</style>

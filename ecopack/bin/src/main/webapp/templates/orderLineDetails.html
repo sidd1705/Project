@@ -1,0 +1,303 @@
+<div class="tab-pane fade in active" id="ordertemplate"
+	ng-controller="orderLineController">
+	<div class="panel panel-default panel-info">
+		<div class="panel-heading">
+			<h3 class="panel-title" style="font-size: 18px !important;">Order
+				Line Information</h3>
+		</div>
+
+		<div class="container orderinfo " id="orderLine">
+			<div id="orderLine">
+				<form data-toggle="validator" role="form" name="theorderForm"
+					id="theorderForm">
+
+					<div class="form-group row" id="inputrow1">
+						<div class="col-sm-4">
+
+							<div class="form-group">
+								<div class="col-sm-5">
+									<label for="" class="control-label">Order Number </label>
+								</div>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" id="ordernumber"
+										disabled="disabled" ng-model="order_number"
+										data-error="Please enter order number" required>
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-5">
+									<label for="ordernumber" class="control-label"> Order
+										Type </label>
+								</div>
+								<div class="col-sm-7">
+									<select type="text" class="form-control" id="orderType"
+										ng-model="customer_type"
+										data-error="Please select customer type" required>
+										<option></option>
+										<option>Trading</option>
+										<option>Manufacturing</option>
+									</select>
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-5">
+									<label for="party" class="control-label">Customer Name</label>
+								</div>
+								<div class="col-sm-7">
+									<!-- <select id="selectCust" class="form-control"
+										ng-model="selectedCustomer" ng-change="selectCustomer()"
+										ng-options="customer as customer.customer_name for customer in customerDetails"
+										required>
+									</select> <span ng-bind="customer_id" hidden="true"></span> <span
+										ng-bind="customer_name" hidden="true"></span> -->
+
+									<p id="selectCust" angucomplete-alt id="customer"
+										class="angucomplete-holder" placeholder="Enter Customer"
+										maxlength="50" pause="100" selected-object="selectedCustomer"
+										local-data="customerList" local-search="localSearch"
+										search-fields="customerName" title-field="customerName"
+										minlength="1" input-class="form-control"
+										match-class="highlight" disable-input="disableInput"></p>
+
+
+									<!--  <span>{{selectedCustomer.originalObject.customerId}}</span>
+                                     <span>{{selectedCustomer.originalObject.customerName}}</span> -->
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+
+						</div>
+						<!--end of col1-->
+
+						<div class="col-sm-4">
+
+							<div class="form-group">
+								<div class="col-sm-5">
+									<label for="orderdate" class="control-label">Order Date</label>
+								</div>
+								<div class="col-sm-7">
+									<p class="input-group" id="ordered_date">
+										<input type="text" id="orderDate" class="form-control"
+											uib-datepicker-popup="{{format}}" ng-model="ordered_date" ng-change="yyDate()"
+											is-open="ordered_datePopup" datepicker-options="dateOptions1"
+											close-text="Close" alt-input-formats="altInputFormats" readonly="readonly"/> <span
+											class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="openOrdered_dateDatePicker()">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-5">
+									<label for="bookeddate" class="control-label">Due
+										Date </label>
+								</div>
+								<div class="col-sm-7">
+									<p class="input-group" id="booked_date">
+										<input type="text" id="dueDate" class="form-control"
+											uib-datepicker-popup="{{format}}" ng-model="booked_date"
+											is-open="booked_datePopup" datepicker-options="dateOptions"
+											close-text="Close" alt-input-formats="altInputFormats" readonly="readonly" /> <span
+											class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="openbooked_dateDatePicker()">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-5">
+									<label for="salesperson" class="control-label">Sales
+										Person </label>
+								</div>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" id="salesPerson"
+										ng-model="sales_person" data-error="Please enter sales person"
+										required>
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+
+						</div>
+						<!--end of col2-->
+						<div class="col-sm-4">
+							<div class="form-group">
+								<div class="col-sm-5">
+									<label for="currency" class="control-label">Currency</label>
+								</div>
+								<div class="col-sm-7">
+									<!-- <select type="text" class="selectpicker" bootstrap-selectpicker id="currency" data-actions-box="true"
+										ng-model="currency" data-error="Please select currency "
+										required >
+										<option></option>
+										<option value="INR" data-icon="glyphicon fa fa-inr">INR</option>
+										<option value="USD" data-icon="glyphicon-usd">USD</option>
+										<option value="EUR" data-icon="glyphicon-euro">EUR</option>
+										<option value="THB" data-icon="glyphicon-btc">THB</option>
+										<option value="JPY" data-icon="glyphicon-jpy">JPY</option>
+										<option value="ILS" data-icon="glyphicon fa fa-ils">ILS</option>
+										<option value="GBP" data-icon="glyphicon-gbp">GBP</option>
+										<option value="KRW" data-icon="glyphicon fa fa-krw">KRW</option>
+										<option value="RUB" data-icon="glyphicon-rub">RUB</option>
+										<option value="TRY" data-icon="glyphicon fa fa-try">TRY</option>
+										<option value="CNY" data-icon="glyphicon-jpy">CNY</option>
+									</select> -->
+									<select type="text" id="currency" class="form-control"
+										ng-model="currency" data-error="Please select currency "
+										required>
+										<option></option>
+										<option value="INR">&#xf156;&nbsp; INR</option>
+										<option value="USD">&#xf155;&nbsp; USD</option>
+										<option value="EUR">&#xf153;&nbsp; EUR</option>
+										<option value="THB">&#xf15a;&nbsp; THB</option>
+										<option value="JPY">&#xf157;&nbsp; JPY</option>
+										<option value="ILS">&#xf20b;&nbsp; ILS</option>
+										<option value="GBP">&#xf154;&nbsp; GBP</option>
+										<option value="KRW">&#xf159;&nbsp; KRW</option>
+										<option value="RUB">&#xf158;&nbsp; RUB</option>
+										<option value="TRY">&#xf195; &nbsp;TRY</option>
+										<option value="CNY">&#xf157;&nbsp; CNY</option>
+									</select>
+									<div class="help-block with-errors" style="width: 151px;"></div>
+								</div>
+								<!--                                 <span>{{currency}}</span> -->
+							</div>
+							<!-- <div class="form-group">
+								<div class="col-sm-5">
+									<label for="status" class="control-label">Status </label>
+								</div>
+								<div class="col-sm-7">
+									<select type="text" class="form-control" id="status"
+										ng-model="flow_status_code" data-error="Plaese select status"
+										required>
+										<option>Entered</option>
+										<option>Booked</option>
+									</select>
+
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>-->
+
+							<div class="form-group">
+								<div class="col-sm-5">
+									<label for="total" class="control-label">Total</label>
+								</div>
+								<div class="col-sm-7">
+									<input type="number" class="form-control" id="total"
+										ng-model="total_order_value" ng-disabled="true"
+										data-error="enter total number">
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="form-group">
+						<button class="btn pull-left" id="subbtn" type="submit"
+							ng-click="btnSaveOrder()"
+							ng-disabled="!(currency && sales_person && 
+							ordered_date && booked_date && selectedCustomer && customer_type)">Submit</button>
+
+					</div>
+				</form>
+
+				<form>
+					<h4 style="background: #d9edf7; color: black; height: 35px;">
+						Line Items</h4>
+					<input type="submit" id="subbtn" class="btn addnew pull-right"
+						ng-click="btnAddLineItems()" value="Add New"
+						ng-disabled="addNewDisabled" style="margin-bottom: 4px;">
+
+					<div class="row clearfix" id="inputrow1">
+						<div class="col-md-12">
+							<div class="scrollable">
+								<table class="table table-striped text-center table-bordered">
+									<thead>
+										<tr>
+											<td hidden="true">RowID</td>
+											<td><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i><i
+												class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></td>
+											<td hidden="true">Header Id</td>
+											<td>Line Id</td>
+											<td>Item ID</td>
+											<td>Item Name</td>
+											<td>Item Desc</td>
+											<td>Order Value</td>
+											<td>Ordered Quantity</td>
+											<td>Item Size</td>
+											<td>Paper Type</td>
+											<td>Paper GSM</td>
+											<td>Print Type</td>
+											<td>Sheets In Kg.</td>
+											<td>In Stock</td>
+											<td>Printing Required</td>
+											<td>Mfg.Required</td>
+											<td>Color1</td>
+											<td>Color2</td>
+											<td>Paper Color</td>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="lineItems in lineItemDetails">
+											<td ng-bind="lineItems.id ={{ $index + 1 }}" hidden="true"></td>
+											<td><a href="#" ng-click="btnDeleteRow(lineItems.id)">
+													<i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+											</a> <a href="#" ng-click="btnEditLineItems(lineItems.id)"> <i
+													class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
+											</a></td>
+											<td ng-bind="lineItems.header_id" hidden="true"></td>
+											<td ng-bind="lineItems.line_id"></td>
+											<td ng-bind="lineItems.item_id"></td>
+											<td ng-bind="lineItems.item_name"></td>
+											<td ng-bind="lineItems.item_desc"></td>
+											<td ng-bind="lineItems.order_value"></td>
+											<td ng-bind="lineItems.ordered_qty"></td>
+											<td ng-bind="lineItems.item_size"></td>
+											<td ng-bind="lineItems.paper_type"></td>
+											<td ng-bind="lineItems.paper_gsm"></td>
+											<td ng-bind="lineItems.print_type"></td>
+											<td ng-bind="lineItems.sheets_in_kg"></td>
+											<td ng-bind="lineItems.in_stock"></td>
+											<td ng-bind="lineItems.printing_required"></td>
+											<td ng-bind="lineItems.mfg_required"></td>
+											<td ng-bind="lineItems.color_1"></td>
+											<td ng-bind="lineItems.color_2"></td>
+											<td ng-bind="lineItems.paper_color"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!--row2-->
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function() {
+
+		$("#subbtn").click(function() {
+
+			$('#orderType').attr("disabled", "disabled");
+			$('#orderDate').attr("disabled", "disabled");
+			$('#dueDate').attr("disabled", "disabled");
+			$('#salesPerson').attr("disabled", "disabled");
+			$('#currency').attr("disabled", "disabled");
+			$('#subbtn').attr("disabled", "disabled");
+
+		});
+
+	});
+	</script>

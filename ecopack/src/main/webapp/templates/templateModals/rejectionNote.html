@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Rejection Note</title>
+<link href="css/modalDialogs.css" rel="stylesheet"></link>
+</head>
+<body>
+	<div class="modal-header modal-header-info">
+		<h3 class="panel-title">
+			<i class="fa fa-commenting-o fa-lg" aria-hidden="true"></i>&nbsp; Rejection Node
+		</h3>
+	</div>
+	<div class="modal-body" id="modal-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<span hidden="true">Header ID : {{ headerId }}</span>
+				<textarea rows="3" cols="32" ng-model="rejectionNote"></textarea>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-primary btn-sm" ng-click="btnSubmit()">
+			<span class="glyphicon glyphicon-saved"></span>&nbsp; Submit
+		</button>
+		<button  class="btn btn-warning btn-sm" type="button" ng-click="cancelModal()"><span class="glyphicon glyphicon-step-backward"></span>Cancel</button>
+	</div>
+</body>
+</html>

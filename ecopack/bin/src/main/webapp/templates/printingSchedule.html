@@ -1,0 +1,88 @@
+<div class="tab-pane fade in active" id="printingTemplate" ng-controller="printingController">
+    <div class="panel panel-default panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+				Printing Schedule
+			</h3>
+		</div>	
+            <form>
+                <div class="row clearfix" id="printRow">
+                    <div class="col-sm-12">
+                        <div class="scrollable">
+                            <table class="table table-striped text-center table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <td>RowID</td>
+                                        <td><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></td>
+                                        <td hidden="true">Printing Line Id</td>
+                                        <td hidden="true">Header ID</td>
+                                        <td>Order No</td>
+                                        <td hidden="true">Order Date</td>
+                                        <td>Line ID</td>
+                                        <td>Item Name</td>
+                                        <td>Paper (Wh/Br)</td>
+                                        <td>Paper GSM</td>
+                                        <td>Print Type(A/C)</td>
+                                        <td>Color-1</td>
+                                        <td>Color-2</td>
+                                        <td>Item Size</td>
+                                        <td>PCS to Print</td>
+                                        <td>Machine No</td>
+                                        <td>Operator</td>
+                                        <td>Paper Lot No.</td>
+                                        <td>Design Number</td>
+                                        <td>Design Name</td>
+                                        <!-- ordered_item -->
+                                        <td>PCS Per Sheet</td>
+                                        <td>No of Sheet to print</td>
+                                        <td>Remaining Sheets To Print</td>
+                                        <td>Actual Printing date</td>
+                                        <td>No of Sheets Printed</td>
+                                        <td>Schedule Date</td>
+                                        <td>Status</td>
+                                    </tr>
+                                </thead>
+                                <tbody ui-sortable="sortableOptions" ng-model="printingSchedule" class="printingSchedule">
+                                    <tr ui-sortable-selectable id="printinfo" ng-repeat="printing in printingSchedule" class="printing" ng-class="{ remaining : printing.printingScheduleAll.flow_status_code =='Partially Completed', entered : printing.printingScheduleAll.flow_status_code =='Entered'}">
+                                        <td>{{ printing.id= $index+1 }}</td>
+                                        <td>
+                                            <a href="#" ng-click="btnAddPrintingSchedule(printing.id)"> <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a>
+                                        </td>
+                                        <td ng-bind="printing.printingScheduleAll.printing_line_id" hidden="true"></td>
+                                        <td ng-bind="printing.printingScheduleAll.header_id" hidden="true"></td>
+                                        <td ng-bind="printing.orderDetails.order_number"></td>
+                                        <td ng-bind="printing.orderDetails.ordered_date" hidden="true"></td>
+                                        <td ng-bind="printing.printingScheduleAll.line_id"></td>
+                                        <td ng-bind="printing.lineItemsDetail.item_name"></td>
+                                        <td ng-bind="printing.lineItemsDetail.paper_type"></td>
+                                        <td ng-bind="printing.lineItemsDetail.paper_gsm"></td>
+                                        <td ng-bind="printing.lineItemsDetail.print_type"></td>
+                                        <td ng-bind="printing.lineItemsDetail.color_1"></td>
+                                        <td ng-bind="printing.lineItemsDetail.color_2"></td>
+                                        <td ng-bind="printing.lineItemsDetail.item_size"></td>
+                                        <td ng-bind="printing.lineItemsDetail.ordered_qty"></td>
+                                        <td ng-bind="printing.printingScheduleAll.machine_number"></td>
+
+                                        <td ng-bind="printing.printingScheduleAll.operator"></td>
+                                        <td ng-bind="printing.printingScheduleAll.paper_lot_num"></td>
+                                        <td ng-bind=""></td>
+                                        <!-- Design No -->
+                                        <td ng-bind=""></td>
+                                        <!-- Design Name -->
+                                        <td ng-bind="printing.printingScheduleAll.pcs_per_sheet"></td>
+                                        <td ng-bind="printing.printingScheduleAll.no_of_sheets_to_print"></td>
+                                        <td ng-bind="printing.printingScheduleAll.remaining_sheets_to_print"></td>
+                                        <td ng-bind="printing.printingScheduleAll.actual_printing_date"></td>
+                                        <td ng-bind="printing.printingScheduleAll.no_of_sheets_printed"></td>
+                                        <td ng-bind="printing.printingScheduleAll.schedule_date"></td>
+                                        <td ng-bind="printing.printingScheduleAll.flow_status_code"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>

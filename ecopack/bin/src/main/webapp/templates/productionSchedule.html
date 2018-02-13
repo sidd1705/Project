@@ -1,0 +1,78 @@
+<div class="tab-pane fade in active" id="productionTemplate" ng-controller="productionController">
+    <div class="panel panel-default panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+				Production Schedule
+			</h3>
+         </div>
+           <form>
+                 <div class="row clearfix" id="inputrow1">
+                    <div class="col-md-12">
+                        <div class="scrollable">
+                            <table class="table table-striped text-center table-bordered">
+                                <thead>
+                                    <tr>
+                                        <td>Priority</td>
+                                        <td><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></td>
+                                        <td hidden="true">Production Line ID</td>
+                                        <td hidden="true">Header ID</td>
+                                        <td>Order No</td>
+                                        <td>Line ID</td>
+                                        <td>Item Name</td>
+                                        <td>Paper Color</td>
+                                        <td>Print Type(A/C)</td>
+                                        <td>Item Code</td>
+                                        <td>Color 1</td>
+                                        <td>Color 2</td>
+                                        <td>Design</td>
+                                        <td>Quantity</td>
+                                        <td>Paper Type</td>
+                                        <td>Kgs of Paper Needed</td>
+                                        <td>Machine No</td>
+                                        <td>Operator</td>
+                                        <td>Remaining Production Quantity</td>
+                                        <td>Schedule Production Date</td>
+                                        <td>Actual Production Date</td>
+                                        <td>Actual Production Quantity</td>
+                                        <td>Status</td>
+                                    </tr>
+                                </thead>
+                                <tbody ui-sortable="sortableOptions" ng-model="productionSchedule">
+                                    <tr id="printinfo" ng-repeat="production in productionSchedule" ng-class="{ remaining : production.productionScheduleAll.flow_status_code =='Partially Completed', entered : production.productionScheduleAll.flow_status_code =='Entered'}">
+                                        <td>{{ production.id= $index+1 }}</td>
+                                        <td>
+                                            <a href="#" ng-click="btnAddProductionSchedule(production.id)"> <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                        <td ng-bind="production.productionScheduleAll.production_line_id" hidden="true"></td>
+                                        <td ng-bind="production.orderDetails.header_id" hidden="true"></td>
+                                        <td ng-bind="production.orderDetails.order_number"></td>
+                                        <td ng-bind="production.lineItemsDetail.line_id"></td>
+                                        <td ng-bind="production.lineItemsDetail.item_name"></td>
+                                        <td ng-bind="production.lineItemsDetail.paper_color"></td>
+                                        <td ng-bind="production.lineItemsDetail.print_type"></td>
+                                        <td ng-bind="item_code"></td>
+                                        <td ng-bind="production.lineItemsDetail.color_1"></td>
+                                        <td ng-bind="production.lineItemsDetail.color_2"></td>
+                                        <td ng-bind="design"></td>
+                                        <td ng-bind="production.lineItemsDetail.ordered_qty"></td>
+                                        <td ng-bind="production.lineItemsDetail.paper_type"></td>
+                                        <td ng-bind="production.lineItemsDetail.sheets_in_kg"></td>
+                                        <td ng-bind="production.productionScheduleAll.machine_number"></td>
+                                        <td ng-bind="production.productionScheduleAll.operator"></td>
+                                        <td ng-bind="production.productionScheduleAll.remaining_production_qty"></td>
+                                        <td ng-bind="production.productionScheduleAll.schedule_production_date"></td>
+                                        <td ng-bind="production.productionScheduleAll.actual_production_date"></td>
+                                        <td ng-bind="production.productionScheduleAll.production_qty"></td>
+                                        <td ng-bind="production.productionScheduleAll.flow_status_code"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--row2-->
+            </form>
+
+        </div>
+    </div>

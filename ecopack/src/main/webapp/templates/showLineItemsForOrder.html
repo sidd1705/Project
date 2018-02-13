@@ -1,0 +1,82 @@
+<div class="tab-pane fade in active"
+	ng-controller="lineItemsForSelectedOrderCtrl">
+	<div class="panel panel-default panel-info">
+		<div class="panel-heading">
+			<h3 class="panel-title" style="font-size: 18px !important;">Orders Line Items</h3>
+		</div>
+		<div class="container-fluid">
+			<div id="manageorders" class="scrollable">
+				<table class="table table-striped text-center table-bordered">
+					<thead>
+										<tr>
+											<td hidden="true">RowID</td>
+											<td hidden="true">Header Id</td>
+											<td hidden="true">Line Id</td>
+											<td hidden="true">Item ID</td>
+											<td>Item Name</td>
+											<td>Item Size</td>
+											<td>Design No.</td>
+											<td>Design Name</td>
+											<td>Paper Color</td>
+											<td>Paper GSM</td>
+											<td>Print Type</td>
+											<td>Color1</td>
+											<td>Color2</td>
+											<td>Item Desc</td>
+											<td>Paper Type</td>
+											<td>Item Value</td>
+											<td>Ordered Quantity</td>
+											<td>In Stock</td>
+											<td>Printing Required</td>
+											<td>Mfg.Required</td>
+											<td>##</td>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="order in orderLineDetails">
+											<td ng-bind="order.id ={{ $index + 1 }}" hidden="true"></td>
+											<td ng-bind="order.headerId" hidden="true"></td>
+											<td ng-bind="order.lineId" hidden="true"></td>
+											<td ng-bind="order.itemId" hidden="true"></td>
+											
+											<td ng-bind="order.itemName"></td>
+											<td ng-bind="order.itemSize"></td>
+											<td ng-bind="order.designNo"></td>
+											<td ng-bind="order.designName"></td>
+											<td ng-bind="order.paperColor"></td>
+											<td ng-bind="order.paperGsm"></td>
+											<td ng-bind="order.printType"></td>
+											<td ng-bind="order.color1"></td>
+											<td ng-bind="order.color2"></td>
+											
+											<td ng-bind="order.itemDesc"></td>
+											<td ng-bind="order.paperType"></td>
+											<td ng-bind="order.orderValue"></td>
+											<td ng-bind="order.orderedQty"></td>
+											<td ng-bind="order.inStock"></td>
+											<td ng-bind="order.printingRequired"></td>
+											<td ng-bind="order.mfgRequired"></td>
+											<td>
+								<div class="btn-group btn-group-justified">
+									<a href="#"  id="Approved" class="btn btn-success btn-xs" ng-click="manageLineItem($event,order.headerId,order.lineId)">Approve</a> 
+									<a href="#"  id="Rejected" class="btn btn-warning btn-xs" ng-click="manageLineItem($event,order.headerId,order.lineId)">Reject</a> 
+								</div>
+							</td>
+										</tr>
+										
+									</tbody>
+
+				</table>
+				<div ng-show="datanotfound == true">
+					<h4 style="text-align: center">Data not found...</h4>
+				</div>
+				<div>
+						<button type="reset" ng-click="btnBack()"
+							class="btn btn-sm btn-danger pull-left">
+							<i class="fa fa-ban"></i> Back
+						</button>
+			    </div>
+			</div>
+		</div>
+	</div>
+</div>

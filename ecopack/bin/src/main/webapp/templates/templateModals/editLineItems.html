@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<link href="css/modalDialogs.css" rel="stylesheet"></link>
+
+</head>
+<body>
+	<div class="modal-header modal-header-info">
+		<h3 class="panel-title">
+			<span ng-bind="buttonAction"></span>-Line Information
+		</h3>
+	</div>
+	<div class="modal-body" id="modal-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<form action="" method="" class="form-horizontal"
+					name="lineItemsForm" style="background: none;">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="siteId" class="col-sm-4 control-label">Header
+								ID</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" readonly id="line"
+									ng-model="header_id">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="siteName" class="col-sm-4 control-label">Order
+								ID</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="line"
+									ng-model="order_number" readonly>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="contactNumber" class="col-sm-4 control-label">Line
+								ID</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="line" readonly
+									ng-model="line_id">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="siteEmail" class="col-sm-4 control-label">Ordered
+								Item</label>
+							<div class="col-sm-8">
+							    <select class="form-control" ng-model="item_id"
+									ng-options="item.item_id as item.item_name for item in itemMaster"
+									required>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="siteAddress" class="col-sm-4 control-label">Item
+								Description</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="item_desc"
+									name="item_desc" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="siteAddress2" class="col-sm-4 control-label">Order
+								Value</label>
+							<div class="col-sm-8">
+								<input type="number" class="form-control" ng-model="order_value"
+									id="value" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="pincode" class="col-sm-4 control-label">Ordered
+								Quantity</label>
+							<div class="col-sm-8">
+								<input type="number" class="form-control" ng-model="ordered_qty"
+									id="quantity" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="city" class="col-sm-4 control-label">Item
+								Size</label>
+							<div class="col-sm-8">
+								<select type="text" class="form-control" id="size"
+									ng-model="item_size" required>
+									<option></option>
+									<option>0</option>
+									<option>1</option>
+									<option>3</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="state" class="col-sm-4 control-label">Paper
+								Type</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="papertype"
+									ng-model="paper_type" required>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+
+						<div class="form-group">
+							<label for="country" class="col-sm-4 control-label">Paper
+								GSM</label>
+							<div class="col-sm-8">
+								<input type="number" class="form-control" ng-model="paper_gsm"
+									id="gsm" required>
+
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="isActive" class="col-sm-4 control-label">Print
+								Type</label>
+							<div class="col-sm-8">
+								<select type="text" class="form-control" id="print_type"
+									ng-model="print_type" required>
+									<option></option>
+									<option>A</option>
+									<option>C</option>
+									<option>D</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="country" class="col-sm-4 control-label">Sheets
+								In Kg.</label>
+							<div class="col-sm-8">
+								<span class="form-control"
+									ng-bind="sheets_in_kg = ordered_qty * paper_gsm | number:2"
+									required></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="country" class="col-sm-4 control-label">Available
+								In Stock</label>
+							<div class="col-sm-8">
+								<select class="form-control" ng-model="in_stock" required>
+									<option ng-repeat="x in inStock" value="{{x.label}}">{{x.label}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="country" class="col-sm-4 control-label">Printing
+								Required</label>
+							<div class="col-sm-8">
+								<select class="form-control" ng-model="printing_required"
+									ng-disabled="in_stock !== 'No'">
+									<option ng-repeat="x in printRequired" value="{{x.label}}">{{x.label}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="country" class="col-sm-4 control-label">Mfg.Required</label>
+							<div class="col-sm-8">
+								<select class="form-control" ng-model="mfg_required"
+									ng-disabled="in_stock !== 'No'">
+									<option ng-repeat="x in mfgRequired" value="{{x.label}}">{{x.label}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="country" class="col-sm-4 control-label">Color1</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="color1"
+									ng-model="color_1" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="country" class="col-sm-4 control-label">Color2</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="color2"
+									ng-model="color_2" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="country" class="col-sm-4 control-label">Paper
+								Color</label>
+							<div class="col-sm-8">
+								<select type="text" class="form-control" id="color2"
+									ng-model="paper_color" required>
+									<option></option>
+									<option>Brown</option>
+									<option>White</option>
+								</select>
+							</div>
+						</div>
+
+					</div>
+
+				</form>
+				
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+			 
+				 <button type="submit" class="btn btn-primary" id="btnAdd" ng-click="btnSaveLineDetails()">
+					<span class="glyphicon glyphicon-saved"></span>&nbsp; Save
+				</button>
+		<button class="btn btn-warning" type="button" ng-click="cancelModal()">Cancel</button>
+	</div>
+
+</body>
+</html>

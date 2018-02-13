@@ -1,0 +1,391 @@
+<style>
+	.class-correct{
+		border: 1px solid #4CAF50 !important;
+	}
+	.class-incorrect{
+		border: 1px solid #f36969 !important;
+	}
+</style>
+<div class="tab-pane fade in active" id="oeeTemplate" ng-controller="oeeController as ctrl">
+	<div class="panel panel-default panel-info">
+		<div class="panel-heading">
+			<h4>OEE-Hourly Production Monitoring- {{reportStatus}}</h4>
+		</div>
+		<div id="reporttulip" class="tab-pane ">
+			<div class="tulipreport">
+				<div>
+					<table class="table table-striped table-bordered" id="loadProductionScheduleFor">
+						<thead>
+							<tr>
+								<th>Machine Type</th>
+								<th>MRN No.</th>
+								<th>Machine</th>
+								<th>Date</th>
+								<th>Shift</th>
+								<th>Product Code</th>
+								<th>#</th>
+							</tr>
+						<tbody>
+							<tr>
+								<td>
+									<select id="ReportSelector"
+										class="form-control" ng-model="selectedMachineType"
+										ng-change="selectMachineType()"
+										ng-options="type as type.machineType for type in machineTypes"
+										required>
+									</select>
+								</td>
+								<td>
+									<input type="number" class="form-control" ng-model="mrnNumber">
+								</td>
+								<td>
+									<select class="form-control " ng-model="machineId"
+										ng-options="machine.machineId as machine.machineNo for machine in machineMaster"
+										required>
+									</select>
+								</td>
+								<td>
+									<p class="input-group" id="oeePlanDate">
+									<input type="text" readonly="readonly" class="form-control"
+										uib-datepicker-popup="{{format}}" ng-model="oeePlanDate"
+										is-open="oeePlanDatePopup" datepicker-options="dateOptions"
+										close-text="Close" alt-input-formats="altInputFormats" /> 
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="oeePlanDatePicker()">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+									 	</span>
+									</p>
+								</td>
+								<td>
+									<select class="form-control" type="text" id="shift"
+									ng-model="shift"
+									style="margin-left: 10px !important; width: 110px !important;"
+									required>
+									<option></option>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>General</option>
+									</select>
+								</td>
+								<td>
+									<select class="form-control" ng-model="productCodeId1" ng-change="getPcsPerHour(productCodeId1)"
+									ng-options="code.productCodeId as code.productCode for code in product1"
+									required>
+									</select>
+								</td>
+								<td>
+									<button class="btn btn-primary pull-left" type="submit"	
+							        ng-click="btnLoadScheduledPlan()" style="margin-left: 30px;">Find</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				
+				</div>
+				<div>
+					<table class="table table-striped table-bordered" id="productionScheduleDetails">
+						<thead>
+							<tr>
+								<th hidden="true">Production Plan Id</th>
+								<th>Order Number</th>
+								<th>PCS Per Hour</th>
+								<th>Scheduled Production Qty.</th>
+							</tr>
+						<tbody>
+							<tr>
+								<td hidden="true">{{plan.productionPlanId}} </td>
+								<td>{{orderNumber}}</td>
+								<td> {{pcsPerHour}} </td>
+								<td>{{ productionQty }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div>
+					<table class="table table-striped table-bordered" id="plantable">
+						<thead>
+							<tr>
+								<th>Time</th>
+								<th>1hr</th>
+								<th>2hr</th>
+								<th>3hr</th>
+								<th>4hr</th>
+								<th>5hr</th>
+								<th>6hr</th>
+								<th>7hr</th>
+								<th>8hr</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td ng-bind="staticData.prod_plan"></td>
+								<td><input type="number" min="0" class="form-control"
+									ng-model="plan.prodPlanFirstHour"></td>
+								<td><input type="number" min="0" class="form-control"
+									ng-model="plan.prodPlanSecondHour"></td>
+								<td><input type="number" min="0" class="form-control"
+									ng-model="plan.prodPlanThirdHour"></td>
+								<td><input type="number" min="0" class="form-control"
+									ng-model="plan.prodPlanFourthHour"></td>
+								<td><input type="number" min="0" class="form-control"
+									ng-model="plan.prodPlanFifthHour"></td>
+								<td><input type="number" min="0" class="form-control"
+									ng-model="plan.prodPlanSixthHour"></td>
+								<td><input type="number" min="0" class="form-control"
+									ng-model="plan.prodPlanSeventhHour"></td>
+								<td><input type="number" min="0" class="form-control"
+									ng-model="plan.prodPlanEightthHour"></td>
+								<td>
+								 <input type="number" min="0"
+									class="form-control" ng-model="plan.totalProductionPlan"
+									readonly="readonly">
+								 <span ng-bind="plan.totalProductionPlan = plan.prodPlanFirstHour + plan.prodPlanSecondHour + plan.prodPlanThirdHour + plan.prodPlanFourthHour + plan.prodPlanFifthHour + plan.prodPlanSixthHour + plan.prodPlanSeventhHour + plan.prodPlanEightthHour"
+									hidden="true"></span>
+								</td>
+							</tr>
+							<tr>
+								<td ng-bind="staticData.actual_prod"></td>
+								<td><input type="number" min="0" max="{{plan.prodPlanFirstHour}}" class="form-control"
+									ng-model="plan.actualProdFirstHour"></td>
+								<td><input type="number" min="0" max="{{plan.prodPlanSecondHour}}" class="form-control"
+									ng-model="plan.actualProdSecondHour"></td>
+								<td><input type="number" min="0" max="{{plan.prodPlanThirdHour}}" class="form-control"
+									ng-model="plan.actualProdThirdHour"></td>
+								<td><input type="number" min="0" max="{{plan.prodPlanFourthHour}}" class="form-control"
+									ng-model="plan.actualProdFourthHour"></td>
+								<td><input type="number" min="0" max="{{plan.prodPlanFifthHour}}" class="form-control"
+									ng-model="plan.actualProdFifthHour"></td>
+								<td><input type="number" min="0" max="{{plan.prodPlanSixthHour}}" class="form-control"
+									ng-model="plan.actualProdSixthHour"></td>
+								<td><input type="number" min="0" max="{{plan.prodPlanSeventhHour}}" class="form-control"
+									ng-model="plan.actualProdSeventhHour"></td>
+								<td><input type="number" min="0" max="{{plan.prodPlanEightthHour}}" class="form-control"
+									ng-model="plan.actualProdEightthHour"></td>
+								<td>
+									<input type="number" min="0"
+									class="form-control" ng-model="plan.totalActualProduction"
+									readonly="readonly">
+								 <span ng-bind="plan.totalActualProduction = plan.actualProdFirstHour + plan.actualProdSecondHour + plan.actualProdThirdHour + plan.actualProdFourthHour + plan.actualProdFifthHour + plan.actualProdSixthHour + plan.actualProdSeventhHour + plan.actualProdEightthHour"
+									hidden="true"></span>
+								</td>
+							</tr>
+							<tr>
+								<td ng-bind="staticData.prod_loss"></td>
+								<td><span
+									ng-bind="plan.prodLossFirstHour = plan.prodPlanFirstHour - plan.actualProdFirstHour"
+									hidden="true"></span> <input type="number" class="form-control"
+									ng-model="plan.prodLossFirstHour" readonly="readonly">
+								</td>
+								<td><span
+									ng-bind="plan.prodLossSecondHour = plan.prodPlanSecondHour - plan.actualProdSecondHour"
+									hidden="true"></span> <input type="number" class="form-control"
+									ng-model="plan.prodLossSecondHour" readonly="readonly">
+								</td>
+								<td><span
+									ng-bind="plan.prodLossThirdHour = plan.prodPlanThirdHour - plan.actualProdThirdHour"
+									hidden="true"></span> <input type="number" class="form-control"
+									ng-model="plan.prodLossThirdHour" readonly="readonly">
+								</td>
+								<td><span
+									ng-bind="plan.prodLossFourthHour = plan.prodPlanFourthHour - plan.actualProdFourthHour"
+									hidden="true"></span> <input type="number" class="form-control"
+									ng-model="plan.prodLossFourthHour" readonly="readonly">
+								</td>
+								<td><span
+									ng-bind="plan.prodLossFifthHour = plan.prodPlanFifthHour - plan.actualProdFifthHour"
+									hidden="true"></span> <input type="number" class="form-control"
+									ng-model="plan.prodLossFifthHour" readonly="readonly">
+								</td>
+								<td><span
+									ng-bind="plan.prodLossSixthHour = plan.prodPlanSixthHour - plan.actualProdSixthHour"
+									hidden="true"></span> <input type="number" class="form-control"
+									ng-model="plan.prodLossSixthHour" readonly="readonly">
+								</td>
+								<td><span
+									ng-bind="plan.prodLossSeventhHour = plan.prodPlanSeventhHour - plan.actualProdSeventhHour"
+									hidden="true"></span> <input type="number" class="form-control"
+									ng-model="plan.prodLossSeventhHour" readonly="readonly">
+								</td>
+								<td><span
+									ng-bind="plan.prodLossEightthHour = plan.prodPlanEightthHour - plan.actualProdEightthHour"
+									hidden="true"></span> <input type="number" class="form-control"
+									ng-model="plan.prodLossEightthHour" readonly="readonly">
+								</td>
+								<td><span
+									ng-bind="plan.totalProductionLoss = plan.totalProductionPlan - plan.totalActualProduction"
+									hidden="true"></span> <input type="number" class="form-control"
+									ng-model="plan.totalProductionLoss" readonly="readonly">
+								</td>
+							</tr>
+							<tr>
+								<td ng-bind="staticData.time_loss"></td>
+								<td>
+									 <input type="number" string-to-number class="form-control" ng-model="plan.timeLossFirstHour" readonly="readonly">
+									 <span ng-bind="plan.timeLossFirstHour = +(60 - (plan.actualProdFirstHour * 60 / plan.prodPlanFirstHour) | number:0)" hidden="true"></span>
+								</td>
+								<td>
+									 <input type="number" string-to-number class="form-control" ng-model="plan.timeLossSecondHour" readonly="readonly">
+									 <span ng-bind="plan.timeLossSecondHour = +(60 - (plan.actualProdSecondHour * 60 / plan.prodPlanSecondHour) | number:0)" hidden="true"></span>
+								</td>
+								<td>
+									 <input type="number" string-to-number class="form-control" ng-model="plan.timeLossThirdHour" readonly="readonly">
+									 <span ng-bind="plan.timeLossThirdHour = +(60 - (plan.actualProdThirdHour * 60 / plan.prodPlanThirdHour) | number:0)" hidden="true"></span>
+								</td>
+								<td>
+									 <input type="number" string-to-number class="form-control" ng-model="plan.timeLossFourthHour" readonly="readonly">
+									 <span ng-bind="plan.timeLossFourthHour = +(60 - (plan.actualProdFourthHour * 60 / plan.prodPlanFourthHour) | number:0)" hidden="true"></span>
+								</td>
+								<td>
+									 <input type="number" string-to-number class="form-control" ng-model="plan.timeLossFifthHour" readonly="readonly">
+									 <span ng-bind="plan.timeLossFifthHour = +(60 - (plan.actualProdFifthHour * 60 / plan.prodPlanFifthHour) | number:0)" hidden="true"></span>
+								</td>
+								<td>
+									 <input type="number" string-to-number class="form-control" ng-model="plan.timeLossSixthHour" readonly="readonly">
+									 <span ng-bind="plan.timeLossSixthHour = +(60 - (plan.actualProdSixthHour * 60 / plan.prodPlanSixthHour) | number:0)" hidden="true"></span>
+								</td>
+								<td>
+									 <input type="number" string-to-number class="form-control" ng-model="plan.timeLossSeventhHour" readonly="readonly">
+									 <span ng-bind="plan.timeLossSeventhHour = +(60 - (plan.actualProdSeventhHour * 60 / plan.prodPlanSeventhHour) | number:0)" hidden="true"></span>
+								</td>
+								<td>
+									 <input type="number" string-to-number class="form-control" ng-model="plan.timeLossEightthHour" readonly="readonly">
+									 <span ng-bind="plan.timeLossEightthHour = +(60 - (plan.actualProdEightthHour * 60 / plan.prodPlanEightthHour) | number:0)" hidden="true"></span>
+								</td>
+							    <td>
+									 <input type="number" string-to-number class="form-control" ng-model="plan.totalTimeLoss" readonly="readonly">
+									 <span ng-bind="plan.totalTimeLoss = plan.timeLossFirstHour + plan.timeLossSecondHour + plan.timeLossThirdHour + plan.timeLossFourthHour + plan.timeLossFifthHour + plan.timeLossSixthHour + plan.timeLossSeventhHour + plan.timeLossEightthHour" hidden="true"></span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<br>
+				<br>
+				<div>
+					<table class="table table-striped table-bordered" id="losstable">
+						<thead>
+							<tr>
+								<th colspan="12" id="planheader">PLANNED / UNPLANNED LOSS &nbsp;&nbsp; (in Minutes)</th>
+							</tr>
+							<tr>
+								<th hidden="true">Index</th>
+								<th hidden="true">Machine Loss ID</th>
+								<th>Loss Type</th>
+								<th hidden="true">OEE Loss Report Id</th>
+								<th>1hr</th>
+								<th>2hr</th>
+								<th>3hr</th>
+								<th>4hr</th>
+								<th>5hr</th>
+								<th>6hr</th>
+								<th>7hr</th>
+								<th>8hr</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="report in oeeLossReport track by $index">
+								<td hidden="true">{{ $index + 1}}</td>
+								<td ng-bind="report.lossTypes.machineLossId" hidden="true"></td>
+								<td ng-bind="report.lossTypes.lossType"></td>
+								<td ng-bind="report.lossReport.lossReportId" hidden="true"></td>
+								<td><input type="number" min="0" class="form-control"
+									ng-model="report.lossReport.firstHour"></td>
+								<td><input type="number" min="0" class="form-control"
+									ng-model="report.lossReport.secondHour"></td>
+								<td><input type="number" min="0" class="form-control"
+									ng-model="report.lossReport.thirdHour"></td>
+								<td><input type="number" min="0" class="form-control"
+									ng-model="report.lossReport.fourthHour"></td>
+								<td><input type="number" min="0" class="form-control"
+									ng-model="report.lossReport.fifthHour"></td>
+								<td><input type="number" min="0" class="form-control"
+									ng-model="report.lossReport.sixthHour"></td>
+								<td><input type="number" min="0" class="form-control"
+									ng-model="report.lossReport.seventhHour"></td>
+								<td><input type="number" min="0" class="form-control"
+									ng-model="report.lossReport.eightthHour"></td>
+								<td><span
+									ng-bind="report.lossReport.totalHours = report.lossReport.firstHour + report.lossReport.secondHour + report.lossReport.thirdHour
+						                                                 + report.lossReport.fourthHour + report.lossReport.fifthHour + report.lossReport.sixthHour
+						                                                 + report.lossReport.seventhHour + report.lossReport.eightthHour"
+									hidden="true"></span> <input type="number" class="form-control"
+									ng-model="report.lossReport.totalHours" readonly="readonly">
+								</td>
+							</tr>
+							<tr ng-if="oeeLossReport!=null">
+								<td>Total</td>
+								<td>	
+									<span ng-bind="losstotal.sumTimeLossFirstHour = (oeeLossReport|total: 'lossReport':'firstHour') " hidden="true"></span>
+									<input type="number" class="form-control" ng-model="losstotal.sumTimeLossFirstHour" ng-class="{'class-correct' : losstotal.sumTimeLossFirstHour == plan.timeLossFirstHour , 'class-incorrect' : losstotal.sumTimeLossFirstHour != plan.timeLossFirstHour}" readonly="readonly">
+								</td>
+								<td>
+									<span ng-bind="losstotal.sumTimeLossSecondHour = (oeeLossReport|total: 'lossReport':'secondHour') " hidden="true"></span>
+									<input type="number"  class="form-control" ng-model="losstotal.sumTimeLossSecondHour" ng-class="{'class-correct' : losstotal.sumTimeLossSecondHour == plan.timeLossSecondHour , 'class-incorrect' : losstotal.sumTimeLossSecondHour != plan.timeLossSecondHour}" readonly="readonly">
+								</td>
+								<td>
+									<span ng-bind="losstotal.sumTimeLossThirdHour = (oeeLossReport|total: 'lossReport':'thirdHour') " hidden="true"></span>
+									<input type="number"  class="form-control" ng-model="losstotal.sumTimeLossThirdHour" ng-class="{'class-correct' : losstotal.sumTimeLossThirdHour == plan.timeLossThirdHour , 'class-incorrect' : losstotal.sumTimeLossThirdHour != plan.timeLossThirdHour}" readonly="readonly">
+								</td>
+								<td>
+									<span ng-bind="losstotal.sumTimeLossFourthHour = (oeeLossReport|total: 'lossReport':'fourthHour') " hidden="true"></span>
+									<input type="number"  class="form-control" ng-model="losstotal.sumTimeLossFourthHour" ng-class="{'class-correct' : losstotal.sumTimeLossFourthHour == plan.timeLossFourthHour , 'class-incorrect' : losstotal.sumTimeLossFourthHour != plan.timeLossFourthHour}" readonly="readonly">
+								</td>
+								<td>
+									<span ng-bind="losstotal.sumTimeLossFifthHour = (oeeLossReport|total: 'lossReport':'fifthHour') " hidden="true"></span>	
+									<input type="number"  class="form-control" ng-model="losstotal.sumTimeLossFifthHour" ng-class="{'class-correct' : losstotal.sumTimeLossFifthHour == plan.timeLossFifthHour , 'class-incorrect' : losstotal.sumTimeLossFifthHour != plan.timeLossFifthHour}" readonly="readonly">
+								</td>
+								<td>
+									<span ng-bind="losstotal.sumTimeLossSixthHour = (oeeLossReport|total: 'lossReport':'sixthHour') " hidden="true"></span>
+									<input type="number"  class="form-control" ng-model="losstotal.sumTimeLossSixthHour" ng-class="{'class-correct' : losstotal.sumTimeLossSixthHour == plan.timeLossSixthHour , 'class-incorrect' : losstotal.sumTimeLossSixthHour != plan.timeLossSixthHour}" readonly="readonly">
+								</td>
+								<td>
+									<span ng-bind="losstotal.sumTimeLossSeventhHour = (oeeLossReport|total: 'lossReport':'seventhHour') " hidden="true"></span>
+									<input type="number"  class="form-control" ng-model="losstotal.sumTimeLossSeventhHour" ng-class="{'class-correct' : losstotal.sumTimeLossSeventhHour == plan.timeLossSeventhHour , 'class-incorrect' : losstotal.sumTimeLossSeventhHour != plan.timeLossSeventhHour}" readonly="readonly">
+								</td>
+								<td>
+									<span ng-bind="losstotal.sumTimeLossEightthHour = (oeeLossReport|total: 'lossReport':'eightthHour') " hidden="true"></span>
+									<input type="text"  class="form-control" ng-model="losstotal.sumTimeLossEightthHour" ng-class="{'class-correct' : losstotal.sumTimeLossEightthHour == plan.timeLossEightthHour , 'class-incorrect' : losstotal.sumTimeLossEightthHour != plan.timeLossEightthHour}" readonly="readonly">
+								</td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div>
+					<table class="table table-striped table-bordered" id="saveplan">
+						<thead>
+							<tr>
+								<th>Operator</th>
+								<th>Maintenance</th>
+								<th>Production Supervisor</th>
+								<th>Production Manager</th>
+							</tr>
+						<tbody>
+							<tr>
+								<td><input type="text" class="form-control"
+									ng-model="plan.operator" ng-readonly="reportStatus=='Update'"></td>
+								<td><input type="text" class="form-control"
+									ng-model="plan.maintenanceOperator" ng-readonly="reportStatus=='Update'"></td>
+								<td><input type="text" class="form-control"
+									ng-model="plan.productionSupervisor" ng-readonly="reportStatus=='Update'"></td>
+								<td><input type="text" class="form-control"
+									ng-model="plan.productionManager" ng-readonly="reportStatus=='Update'"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<span hidden="true">{{ isTimeLossReportMatched = matchTimeLossReport()}}</span>
+				<button class="btn btn-primary pull-left" id="subbtn" type="submit" ng-disabled="reportStatus==null || isTimeLossReportMatched === false"
+					ng-click="saveOEEReport()" style="margin-left: 30px;">Save
+					Report</button>
+				<br> <br>
+				<br>
+			</div>
+		</div>
+	</div>
+</div>

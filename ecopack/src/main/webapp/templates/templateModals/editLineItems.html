@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Line Information</title>
+
+<link href="css/modalDialogs.css" rel="stylesheet"></link>
+
+</head>
+<body>
+	<div class="modal-header modal-header-info">
+		<h3 class="panel-title">
+			<span ng-bind="buttonAction"></span>-Line Information
+		</h3>
+	</div>
+	<div class="modal-body" id="modal-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<form action="" method="" class="form-horizontal"
+					name="lineItemsForm" style="background: none;">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="orderNumber" class="col-sm-4 control-label">Order
+								No.</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="orderNumber"
+									ng-model="orderNumber" readonly>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="designNo" class="col-sm-4 control-label">Design No</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="designNo"
+									name="designNo" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="itemId" class="col-sm-4 control-label">Ordered
+								Item</label>
+							<div class="col-sm-8">
+							    <select class="form-control" ng-model="itemId" 
+									ng-options="item.itemId as item.itemName for item in itemMaster | filter:{designNo:designNo} "
+									ng-change="itemName=(itemMaster|filter:{itemId:itemId})[0].itemName;
+											   itemSize=(itemMaster|filter:{itemId:itemId})[0].itemSize;
+									           designNo=(itemMaster|filter:{itemId:itemId})[0].designNo;
+									           designName=(itemMaster|filter:{itemId:itemId})[0].designName;
+									           paperColor=(itemMaster|filter:{itemId:itemId})[0].paperColor;
+									           paperGsm=(itemMaster|filter:{itemId:itemId})[0].paperGsm;
+									           printType=(itemMaster|filter:{itemId:itemId})[0].printType;
+									           color1=(itemMaster|filter:{itemId:itemId})[0].color1;
+									           color2=(itemMaster|filter:{itemId:itemId})[0].color2;
+									           addPer=((printType=='A')?'10%':((printType=='C')?'5%':' '));
+									           calculateFields(itemSize,printType,itemName)"
+									required>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="itemName" class="col-sm-4 control-label">Item Name</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="itemName"
+									name="itemName"  required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="itemSize" class="col-sm-4 control-label">Item
+								Size</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="itemSize"
+									name="itemSize"  required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="designName" class="col-sm-4 control-label">Design Name</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="designName"
+									name="designName"  required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="paperColor" class="col-sm-4 control-label">Paper
+								Color</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="paperColor"
+									id="paperColor"  required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="paperGsm" class="col-sm-4 control-label">Paper
+								GSM</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="paperGsm"
+									id="paperGsm"  required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="printType" class="col-sm-4 control-label">Print
+								Type</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="printType"
+									id="printType"  required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="color1" class="col-sm-4 control-label">Color1</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="color1"
+									ng-model="color1"  required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="color1" class="col-sm-4 control-label">Color2</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="color2"
+									ng-model="color2"  required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="pcsPerSheet" class="col-sm-4 control-label">PCS Per Sheet</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="pcsPerSheet"
+									ng-model="pcsPerSheet"  required>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+					    <div class="form-group">
+							<label for="pcsPerHour" class="col-sm-4 control-label">PCS Per Hours</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="pcsPerHour" 
+									required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="productCode" class="col-sm-4 control-label">Product Code</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="productCode" 
+									required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="itemDesc" class="col-sm-4 control-label">Item
+								Description</label>
+							<div class="col-sm-8">
+									<textarea rows="4" class="form-control" cols="31" ng-model="itemDesc"></textarea>
+							</div>
+						</div>
+					    <div class="form-group">
+							<label for="paperTypeId" class="col-sm-4 control-label">Paper
+								Type</label>
+							<div class="col-sm-8">
+								<select class="form-control" ng-model="paperTypeId"
+									ng-options="type.paperTypeId as type.paperType for type in paperTypes"
+									required>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="orderValue" class="col-sm-4 control-label">Item
+								Value</label>
+							<div class="col-sm-8">
+								<input type="number" class="form-control" ng-model="orderValue"
+									id="orderValue" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="orderedQty" class="col-sm-4 control-label">Ordered
+								Quantity</label>
+							<div class="col-sm-8">
+								<input type="number" class="form-control" ng-model="orderedQty"
+									id="orderedQty" required>
+							</div>
+						</div>
+						<div class="form-group">
+								<label for="dueDate" class="col-sm-4 control-label">Due Date</label>
+								<div class="col-sm-8">
+									<p class="input-group" id="due_date">
+										<input type="text" id="dueDate" class="form-control"
+											uib-datepicker-popup="{{format}}" ng-model="dueDate"
+											is-open="dueDatePopup" datepicker-options="dueDateOptions"
+											close-text="Close" alt-input-formats="altInputFormats"
+											readonly="readonly" /> <span class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="openDueDateDatePicker()">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</p>
+								</div>
+						</div>
+						<div class="form-group">
+							<label for="inStock" class="col-sm-4 control-label">Available
+								In Stock</label>
+							<div class="col-sm-8">
+								<select class="form-control" ng-model="inStock"
+									ng-options="object.inStock as object.inStockLabel for object in inStockJson"
+									required>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="printingRequired" class="col-sm-4 control-label">Printing
+								Required</label>
+							<div class="col-sm-8">
+								<select class="form-control" ng-model="printingRequired" ng-disabled="inStock !== 'No'"
+									ng-options="object.printingRequired as object.printingRequiredLabel for object in printRequiredJson"
+									required>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="mfgRequired" class="col-sm-4 control-label">Mfg.Required</label>
+							<div class="col-sm-8">
+								<select class="form-control" ng-model="mfgRequired" ng-disabled="inStock !== 'No'"
+									ng-options="object.mfgRequired as object.mfgRequiredLabel for object in mfgRequiredJson"
+									required>
+								</select>
+							</div>
+						</div>
+					</div>
+                     
+				</form>
+				
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer"> 
+				 <button type="submit" class="btn btn-primary" id="btnAdd" ng-click="btnSaveLineDetails()">
+					<span class="glyphicon glyphicon-saved"></span>&nbsp; Save
+				</button>
+		<button class="btn btn-warning" type="button" ng-click="cancelModal()">Cancel</button>
+	</div>
+
+</body>
+</html>

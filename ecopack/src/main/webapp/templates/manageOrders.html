@@ -1,0 +1,58 @@
+<div class="tab-pane fade in active"
+	ng-controller="manageOrdersController">
+	<div class="panel panel-default panel-info">
+		<div class="panel-heading">
+			<h3 class="panel-title" style="font-size: 18px !important;">Manage Orders</h3>
+		</div>
+		<div class="container-fluid">
+			<div id="manageorders" class="scrollable">
+				<table class="table table-striped text-center table-bordered">
+					<thead>
+						<tr>
+							<th hidden="true">RowNum</th>
+							<th><i class="fa fa-pencil-square-o" aria-hidden="true"></i></th>
+							<th hidden="true">Header Id</th>
+							<th>Order Number</th>
+							<th>Customer Name</th>
+							<th>Customer Type</th>
+							<th>Sales Executive</th>
+							<th>Ordered Date</th>
+							<th>Due Date</th>
+							<th>Currency</th>
+							<th>Total Order Value</th>
+							<th>No. of Line Items</th>
+							<th>Status</th>
+							<th>##</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="order in enteredOrders">
+							<td hidden="true">{{$index+1}}</td>
+							<td><a href="#" ng-click="showOrderLineItems(order)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+							<td ng-bind="order.orderDetails.headerId" hidden="true"></td>
+							<td ng-bind="order.orderDetails.orderNumber"></td>
+							<td ng-bind="order.customerMaster.customerName"></td>
+							<td ng-bind="order.orderDetails.customerType"></td>
+							<td ng-bind="order.employeeMaster.empFullname"></td>
+							<td ng-bind="order.orderDetails.orderedDate"></td>
+							<td ng-bind="order.orderDetails.dueDate"></td>
+							<td ng-bind="order.orderDetails.currency"></td>
+							<td ng-bind="order.orderDetails.totalOrderValue"></td>
+							<td ng-bind="order.noOfLineItems"></td>
+							<td ng-bind="order.orderDetails.flowStatusCode"></td>
+							<td>
+								<div class="btn-group btn-group-justified">
+									<a href="#" id="Approved" class="btn btn-success btn-xs" ng-click="manageOrder($event,order)">Approve</a> 
+									<a href="#" id="Rejected" class="btn btn-warning btn-xs" ng-click="manageOrder($event,order)">Reject</a> 
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div ng-show="datanotfound == true">
+					<h4 style="text-align: center">Data not found...</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

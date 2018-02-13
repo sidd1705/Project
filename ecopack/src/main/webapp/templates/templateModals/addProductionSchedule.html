@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Production Schedule</title>
+
+<link href="css/modalDialogs.css" rel="stylesheet"></link>
+<style>
+ .newProduction {
+     background: bisque !important;
+ }
+
+.remainingProduction{
+     background: bisque !important;
+}
+</style>
+
+</head>
+<body class="modal-dialog">
+	<div class="modal-header modal-header-info">
+		<h3 class="panel-title">Add Production Schedule</h3>
+	</div>
+	<div class="modal-body" id="modal-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<form class="form-horizontal" style="background: none;">
+					<div class="col-sm-4">
+						
+						<div class="form-group" hidden="true">
+							<label for="headerId" class="col-sm-4 control-label">Production Line Id
+								ID</label>
+							<div class="col-sm-8">
+								<input type="number" class="form-control" ng-model="productionLineId"
+									readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group" hidden="true">
+							<label for="headerId" class="col-sm-4 control-label">Header
+								ID</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="headerId"
+									readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="orderNumber" class="col-sm-4 control-label">Order
+								No</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="orderNumber"
+									readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="orderedDate" class="col-sm-4 control-label">Order
+								Date</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="orderedDate"
+									readonly="readonly">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="itemName" class="col-sm-4 control-label">Item
+								Name</label>
+							<div class="col-sm-8">
+								<textarea class="form-control" ng-model="itemName" rows="3"
+									cols="25" readonly="readonly"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="itemSize" class="col-sm-4 control-label">Item
+								Size</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="itemSize"
+									readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="designNo" class="col-sm-4 control-label">Design
+								Number</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="designNo"
+									readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="designName" class="col-sm-4 control-label">Design
+								Name</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="designName"
+									readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="paperColor" class="col-sm-4 control-label">Paper
+								Color(Wh/Br)</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="paperColor"
+									readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="paperGsm" class="col-sm-4 control-label">Pager
+								GSM</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="paperGsm"
+									readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="printType" class="col-sm-4 control-label">Print
+								Type</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="printType"
+									readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="color1" class="col-sm-4 control-label">Color1</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="color1"
+									readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="color2" class="col-sm-4 control-label">Color2</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="color2"
+									readonly="readonly">
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4">						
+						<div class="form-group">
+							<label for="itemDesc" class="col-sm-4 control-label">Item
+								Desc.</label>
+							<div class="col-sm-8">
+								<textarea class="form-control" ng-model="itemDesc" rows="3"
+									cols="25" readonly="readonly"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="mfgRequired" class="col-sm-4 control-label">Manufacturing
+								Required</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="mfgRequired"
+									readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="orderedQty" class="col-sm-4 control-label">Order
+								Quantity</label>
+							<div class="col-sm-8">
+								<input type="number" class="form-control" ng-model="orderedQty"
+									readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group" hidden="true">
+							<label for="headerId" class="col-sm-4 control-label">Printing
+								Line ID</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control"
+									ng-model="printingLineId" readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="flowStatusCode" class="col-sm-4 control-label">Printing
+								Status</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control"
+									ng-model="flowStatusCode" readonly="readonly" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="pcsPerSheet" class="col-sm-4 control-label">PCS Per Sheet</label>
+							<div class="col-sm-8">
+								<input type="number" class="form-control" ng-model="pcsPerSheet"
+									readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="extraNoOfSheetsToPrint" class="col-sm-4 control-label">Extra No. of Sheets to Print</label>
+							<div class="col-sm-8">
+								<input type="number" class="form-control" ng-model="extraNoOfSheetsToPrint"
+									readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="pcsPerHour" class="col-sm-4 control-label">Pc Per Hours</label>
+							<div class="col-sm-8">
+								<input type="number" class="form-control" ng-model="pcsPerHour"
+									readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="noOfSheetsPrinted" class="col-sm-4 control-label">No. of Sheets Printed</label>
+							<div class="col-sm-8">
+								 <input type="number" class="form-control" ng-model="noOfSheetsPrinted"
+									readonly="readonly"> 
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="productionQty" class="col-sm-4 control-label"> Production Qty.</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="productionQty" readonly="readonly"
+									ng-class="{ newProduction : productionLineId===0}"
+									required>
+							</div>
+						</div>
+						
+					</div>
+
+					<div class="col-sm-4">
+						
+						<div class="form-group">
+							<label for="actualPrintingDate" class="col-sm-4 control-label">Actual Printing Date</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="actualPrintingDate"
+									readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="actualPrintingDate" class="col-sm-4 control-label">MRN No.</label>
+							<div class="col-sm-8">
+								<input type="number" class="form-control" ng-model="mrnNumber" ng-blur="checkMrnNumberExists(mrnNumber)">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="machineId" class="col-sm-4 control-label">Machine
+								Number</label>
+							<div class="col-sm-8">
+								<!-- <input type="text" class="form-control" ng-model="machine_id" required> -->
+								<select class="form-control" ng-model="machineId"
+									ng-options="machine.machineId as machine.machineNo for machine in machineMaster"
+									required>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="operator" class="col-sm-4 control-label">Shift</label>
+							<div class="col-sm-8">
+								<select class="form-control" ng-model="shift" required>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>General</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="operator" class="col-sm-4 control-label">Product Code</label>
+							<div class="col-sm-8">
+								<select class="form-control" ng-model="productCodeId"
+									ng-options="code.productCodeId as code.productCode for code in productCodeMaster"
+									ng-change="pcsPerHour=(productCodeMaster|filter:{productCodeId:productCodeId})[0].pcsPerHour;"
+									required>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="operator" class="col-sm-4 control-label">Product Code</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="productCode" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="operator" class="col-sm-4 control-label">Operator</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="operator"
+									required>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="productionQty" class="col-sm-4 control-label">Remaining Production Qty.</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="remainingProductionQty" readonly="readonly"
+									ng-class="{ remainingProduction : productionLineId > 0}"
+									required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="scheduleDate" class="col-sm-4 control-label">Schedule
+								Date</label>
+							<div class="col-sm-8">
+								<p class="input-group" id="scheduleDate">
+									<input type="text" class="form-control"
+										uib-datepicker-popup="{{format}}" ng-model="productionScheduleDate"
+										is-open="scheduleDatePopup" datepicker-options="dateOptions"
+										close-text="Close" alt-input-formats="altInputFormats"
+										required readonly="readonly" /> <span class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="openScheduleDateDatePicker()">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="requiredTime" class="col-sm-4 control-label">Required Time</label>
+							<div class="form-group">
+					          <div class="col-sm-3 center">
+								<span  class="form-control" ng-bind="requiredTimeHrs"
+									readonly="readonly"></span>
+							</div>
+							<div>
+							     <label for="pcsPerHour" class="col-sm-1 control-label">:</label>
+							</div>
+							<div class="col-sm-3 center">
+								<span  class="form-control" ng-bind="requiredTimeMin" 
+									readonly="readonly"></span>
+							</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<!-- 	  <button class="btn btn-primary" type="button" ng-click="ok()">Ok</button> -->
+		<button class="btn btn-primary" type="submit" id="btnSave"
+			ng-click="saveProductionScheduleDetails()">
+			<span class="glyphicon glyphicon-saved"></span>&nbsp; Save
+		</button>
+		<button class="btn btn-warning" type="button" ng-click="cancelModal()">Cancel</button>
+	</div>
+
+</body>
+</html>

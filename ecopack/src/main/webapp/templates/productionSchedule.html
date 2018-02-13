@@ -1,0 +1,107 @@
+<div class="tab-pane fade in active" id="productionTemplate"
+	ng-controller="productionController">
+	<div class="panel panel-default panel-info">
+		<div class="panel-heading">
+			<h3 class="panel-title">Production Schedule</h3>
+		</div>
+		<form>
+			<div class="row clearfix" id="printRow">
+				<div class="col-sm-12">
+					<div class="scrollable">
+						<table
+							class="table table-striped text-center table-bordered table-hover table-condensed">
+							<thead class="bg-primary">
+								<tr id="productionrow">
+									<td hidden="true">RowID</td>
+									<td><i class="fa fa-pencil-square-o fa-lg"
+										aria-hidden="true"></i></td>
+									<td hidden="true">Header ID</td>
+									<td>Order No</td>
+									<td>Order Date</td>
+									
+									<td>Item ID</td>
+									<td>Item Name</td>
+									<td>Item Size</td>
+									<td>Design Number</td>
+									<td>Design Name</td>
+									<td>Paper Color(Wh/Br)</td>
+									<td>Paper GSM</td>
+									<td>Print Type(A/C)</td>
+									<td>Color-1</td>
+									<td>Color-2</td>
+									<td>Item Desc</td>
+									<td>Ordered Qty</td>
+									<td>Manufacturing Required</td>
+									
+									<td>Printing Line Id</td>
+									<td>PCs per Sheet</td>
+									<td>Extra no of Sheets to Print</td>
+									<td>No of Sheets To Printed</td>
+									<td>Actual Printing Date</td>
+									<td>Status</td>
+								</tr>
+							</thead>
+							<tbody ui-sortable="sortableOptions" ng-model="productionScheduleData" class="productionScheduleData">
+								<tr ui-sortable-selectable id="productionInfo"
+									ng-repeat="production in productionScheduleData" class="production"
+									ng-class="{ remaining : printing.printingScheduleAll.flow_status_code =='Partially Completed', entered : printing.printingScheduleAll.flow_status_code =='Entered'}">
+									
+									<td hidden="true">{{ production.id= $index+1 }}</td>
+									<td>
+										<a href="#" ng-click="btnAddProductionSchedule(production)"> 
+											<i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
+										</a>
+									</td>
+									<td ng-bind="production.headerId" hidden="true"></td>
+									<td ng-bind="production.orderNumber"></td>
+									<td ng-bind="production.orderedDate"></td>
+									
+									<td ng-bind="production.itemId"></td>
+									<td ng-bind="production.itemName"></td>
+									<td ng-bind="production.itemSize"></td>
+									<td ng-bind="production.designNo"></td>
+									<td ng-bind="production.designName"></td>
+									<td ng-bind="production.paperColor"></td>
+									<td ng-bind="production.paperGsm"></td>
+									<td ng-bind="production.printType"></td>
+									<td ng-bind="production.color1"></td>
+									<td ng-bind="production.color2"></td>
+									<td ng-bind="production.itemDesc"></td>
+									<td ng-bind="production.orderedQty"></td>
+									<td ng-bind="production.mfgRequired"></td>
+									
+									<td ng-bind="production.printingLineId"></td>
+									<td ng-bind="production.pcsPerSheet"></td>
+									<td ng-bind="production.extraNoOfSheetsToPrint"></td>
+									<td ng-bind="production.noOfSheetsPrinted"></td>
+									<td ng-bind="production.actualPrintingDate"></td>
+									<td ng-bind="production.flowStatusCode"></td>
+								</tr>
+							</tbody>
+						</table>
+						<div ng-show="datanotfound == true">
+							<h4 style="text-align: center">Data not found...</h4>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</form>
+	</div>
+</div>
+
+
+<style>
+.remaining {
+	background-color: #ffeeba !important;
+}
+
+.entered {
+	background-color: white;
+}
+
+.printing.ui-sortable-selected {
+	background-color: yellow !important;
+}
+</style>
